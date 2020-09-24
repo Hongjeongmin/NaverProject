@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.projectserver.repo.EventRepo">
+	<insert id="insert" parameterType="event" useGeneratedKeys="true" keyProperty="id">
+		insert into event(name ,owner ,description ,location ,basePrice ,maxPrice ,beginEventDateTime ,endEventDateTime ,online ,free) values(#{name}, #{owner}, #{description}, #{location}, #{basePrice}, #{maxPrice}, #{beginEventDateTime}, #{endEventDateTime} ,#{online} ,#{free})
+	</insert>
+	
+	<update id="update" parameterType="event" useGeneratedKeys="true" keyProperty="id">
+		update event set description = #{description} where id = #{id} and owner =#{owner}
+	</update>
+	
+	<delete id="delete" parameterType="event">
+		delete from event where id = #{id} and owner = #{owner}
+	</delete>
+	
+	<select id="selectOne" parameterType="string" resultType="event">
+		select * from event where id = #{id}
+	</select>
+	
+	<select id="selectAll" parameterType="string" resultType="event">
+		select * from event where owner = #{owner}
+	</select>
+</mapper>
